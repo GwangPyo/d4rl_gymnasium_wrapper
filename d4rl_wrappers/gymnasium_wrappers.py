@@ -83,8 +83,8 @@ class GymnasiumWrapper(gym.Env):
         self.wrapped = wrapped_env
         self.timeout_key = timeout_key
         try:
-            self.observation_space_type = SpaceParser.parse(self.wrapped.observation_space)
-            self.action_space_type = SpaceParser.parse(self.wrapped.action_space)
+            self.observation_space = SpaceParser.parse(self.wrapped.observation_space)
+            self.action_space = SpaceParser.parse(self.wrapped.action_space)
 
         except KeyError:
             raise NotImplementedError
