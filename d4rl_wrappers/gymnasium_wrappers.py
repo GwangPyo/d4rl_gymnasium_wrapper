@@ -40,8 +40,7 @@ class SpaceParser(object):
 
     @staticmethod
     def tuple(space: classic_gym.spaces.Tuple):
-        for s in space:
-            gym.spaces.Tuple([type_parser[type(s)](s)])
+        gym.spaces.Tuple([type_parser[type(s)](s) for s in space.spaces])
 
     @staticmethod
     def dict(space: classic_gym.spaces.Dict):
@@ -85,7 +84,6 @@ class GymnasiumWrapper(gym.Env):
         try:
             self.observation_space = SpaceParser.parse(self.wrapped.observation_space)
             self.action_space = SpaceParser.parse(self.wrapped.action_space)
-
         except KeyError:
             raise NotImplementedError
 
