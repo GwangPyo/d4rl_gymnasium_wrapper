@@ -41,14 +41,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     package_data={
-        "d4rl": [
-            "locomotion/assets/*",
-            "hand_manipulation_suite/assets/*",
-            "hand_manipulation_suite/Adroit/*",
-            "hand_manipulation_suite/Adroit/gallery/*",
-            "hand_manipulation_suite/Adroit/resources/*",
-            "hand_manipulation_suite/Adroit/resources/meshes/*",
-            "hand_manipulation_suite/Adroit/resources/textures/*",
+        "d4rl_gymnasium_wrappers": [
+            "wrappers/*",
         ]
     },
     install_requires=[
