@@ -18,7 +18,7 @@ def get_description():
 
 def get_version():
     """Gets the d4rl version."""
-    path = "wrappers/__init__.py"
+    path = "d4rl_wrappers/__init__.py"
     with open(path) as file:
         lines = file.readlines()
 
@@ -42,7 +42,7 @@ setup(
     include_package_data=True,
     package_data={
         "d4rl_gymnasium_wrappers": [
-            "wrappers/*",
+            "d4rl_wrappers/*",
         ]
     },
     install_requires=[
