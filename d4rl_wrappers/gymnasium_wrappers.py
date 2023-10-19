@@ -3,7 +3,7 @@ import gym as classic_gym
 import numpy as np
 from inspect import getfullargspec
 
-HAS_TIMEOUT_IN_CLASSIC_GYM = classic_gym.__version__ > '0.24'
+HIGH_VERSION_GYM = classic_gym.__version__ > '0.24'
 
 
 class SpaceParser(object):
@@ -95,15 +95,17 @@ class GymnasiumWrapper(gym.Env):
         return self.wrapped.render(mode=render_mode)
 
     def reset(self, *, seed=None, options=None):
-        if seed is not None:
-            self.wrapped.seed(seed)
-        if options is not None:
-            raise NotImplementedError("Setting option is not implemented yet.")
-
-        return self.wrapped.reset(), {}
+        if HIGH_VERSION_GYM:
+            self.wrapped.reset(seed=seed, options=options)
+        else:
+            if seed is not None:
+                self.wrapped.seed(seed)
+            if options is not None:
+                raise NotImplementedError("Setting option is not implemented yet.")
+            return self.wrapped.reset(), {}
 
     def step(self, actions):
-        if HAS_TIMEOUT_IN_CLASSIC_GYM:
+        if HIGH_VERSION_GYM:
             observation, reward, done, timeout, info = self.wrapped.step(actions)
             return observation, reward, done, timeout, info
         else:
