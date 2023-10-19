@@ -52,9 +52,9 @@ class SpaceParser(object):
             parser = type_parser[type(space)]
             spec = getfullargspec(parser)
             if cast_float32 in spec.args:
-                parser(space, cast_float32)
+                return parser(space, cast_float32)
             else:
-                parser(space)
+                return parser(space)
         except KeyError:
             raise NotImplementedError(f"Type {type(space)} is not implemented yet.")
 
@@ -125,3 +125,7 @@ class D4RLGymnasiumEnv(GymnasiumWrapper):
 
 
 
+if __name__ == '__main__':
+    env = D4RLGymnasiumEnv('bullet-hopper-medium-expert-v0')
+    print(env.observation_space)
+    print(env.action_space)
