@@ -96,7 +96,7 @@ class GymnasiumWrapper(gym.Env):
 
     def reset(self, *, seed=None, options=None):
         if HIGH_VERSION_GYM:
-            self.wrapped.reset(seed=seed, options=options)
+            return self.wrapped.reset(seed=seed, options=options)
         else:
             if seed is not None:
                 self.wrapped.seed(seed)
